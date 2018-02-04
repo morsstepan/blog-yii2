@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\models\Category;
 use app\models\ImageUpload;
+use app\models\Tag;
 use Yii;
 use app\models\Article;
 use app\models\ArticleSearch;
@@ -132,8 +133,11 @@ class ArticleController extends Controller
     public function actionSetCategory($id)
     {
         $article = $this->findModel($id);
-        $selectedCategory = ($article->category) ? $article->category->id : '0';
-        $categories = $article->category->getCategories();
+        //$selectedCategory = ($article->category) ? $article->category->id : '0';
+        $selectedCategory = $article->getSelectedCategory();
+        //TODO: Перенести в Category?
+        $categories = $article->getAllCategories();
+        //$categories = ArrayHelper::map(Category::find()->all(), 'id', 'title');
         if(Yii::$app->request->isPost)
         {
             $category = Yii::$app->request->post('category');
@@ -148,6 +152,25 @@ class ArticleController extends Controller
             'categories' => $categories
         ]);
 
+    }
+
+    public function actionSetTags($id)
+    {
+        $article  = $this->findModel($id);
+        $selectedTags = $article->getSelectedTags();
+        $tags = $article->getAllTags();
+        //$tag = Tag::findOne(1);
+        //var_dump($tag->articles);
+        if(Yii::$app->request->isPost)
+        {
+            $tags = Yii::$app->request->post('tags');
+            $article->saveTags($tags);
+            return $this->redirect(['view', 'id'=>$article->id]);
+        }
+        return $this->render('tags', [
+            'selectedTags' => $selectedTags,
+            'tags' => $tags
+        ]);
     }
 
     /**
