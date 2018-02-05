@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Article;
+use app\models\Category;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -63,16 +64,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $query = Article::find();
-        $count = $query->count();
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => 1]);
-        $articles = $query->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
-
+        $data = Article::getAllArticles();
+        $popular = Article::getPopular();
+        $recent = Article::getRecent();
+        $categories = Category::getAllCategories();
         return $this->render('index', [
-            'articles' => $articles,
-            'pagination' => $pagination
+            'articles' => $data['articles'],
+            'pagination' => $data['pagination'],
+            'popular' => $popular,
+            'recent' => $recent,
+            'categories' => $categories
         ]);
     }
 
