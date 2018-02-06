@@ -160,9 +160,9 @@ class Article extends \yii\db\ActiveRecord
         $articles = $query->offset($pagination->offset)
             ->limit($pagination->limit)
             ->all();
-        $date['articles'] = $articles;
-        $date['pagination'] = $pagination;
-        return $date;
+        $data['articles'] = $articles;
+        $data['pagination'] = $pagination;
+        return $data;
     }
 
     public static function getPopular()
@@ -174,4 +174,13 @@ class Article extends \yii\db\ActiveRecord
     {
         return Article::find()->orderBy('date desc')->limit(4)->all();
     }
+
+    public function getArticleTags()
+    {
+        //$this->hasMany(Tag::className(), ['id' => 'tag_id' ])
+        //    ->viaTable('article_tag', ['article_id' => 'id']);
+        return ArrayHelper::map($this->tags, 'id', 'title');
+    }
+
 }
+
