@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Article;
 use app\models\Category;
 use app\models\Tag;
+use app\models\User;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -101,9 +102,9 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout($id)
+    public function actionAbout()
     {
-        $user = User::findOne($id);
+        $user = User::findOne(1);
         $popular = Article::getPopular();
         $recent = Article::getRecent();
         $categories = Category::getAllCategories();

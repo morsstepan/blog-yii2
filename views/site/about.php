@@ -6,7 +6,6 @@
             <div class="col-md-8">
                 <article class="post">
                     <div class="post-thumb">
-                        <a href="<?= Url::toRoute(['site/view', id => $article->id]); ?>"><img src="<?= $article->getImage(); ?>" alt=""></a>
                     </div>
                     <div class="post-content">
                         <header class="entry-header text-center text-uppercase">
@@ -18,11 +17,6 @@
                         </header>
                         <div class="entry-content">
                             <?= $article->content ?>
-                        </div>
-                        <div class="decoration">
-                            <?php foreach($tags as $tag): ?>
-                                <a href="<?= Url::toRoute(['site/view', id => $article->id]); ?>" class="btn btn-default"><?= $tag->title; ?></a>
-                            <?php endforeach; ?>
                         </div>
 
                     </div>
