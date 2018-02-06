@@ -58,19 +58,4 @@ class AuthController extends Controller
 
         return $this->render('signup', ['model' => $model]);
     }
-
-    public function actionTest()
-    {
-        $user = User::findOne(1);
-        Yii::$app->user->login($user);
-
-        if(Yii::$app->user->isGuest)
-        {
-            echo 'guest';
-        }
-        else
-        {
-            echo 'ff';
-        }
-    }
 }

@@ -101,9 +101,19 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout()
+    public function actionAbout($id)
     {
-        return $this->render('about');
+        $user = User::findOne($id);
+        $popular = Article::getPopular();
+        $recent = Article::getRecent();
+        $categories = Category::getAllCategories();
+
+        return $this->render('about', [
+            'user' => $user,
+            'popular' => $popular,
+            'recent' => $recent,
+            'categories' => $categories
+        ]);
     }
 
     public function actionView($id)
