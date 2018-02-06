@@ -182,5 +182,11 @@ class Article extends \yii\db\ActiveRecord
         return ArrayHelper::map($this->tags, 'id', 'title');
     }
 
+    public function saveArticle()
+    {
+        $this->user_id - Yii::$app->user->id;
+        return $this->save();
+    }
+
 }
 
