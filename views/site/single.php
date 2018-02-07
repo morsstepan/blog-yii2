@@ -18,6 +18,7 @@
                         </header>
                         <div class="entry-content">
                             <?= $article->content ?>
+                            <?= $article->getImage(); ?>
                         </div>
                         <div class="decoration">
                             <?php foreach($tags as $tag): ?>

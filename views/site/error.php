@@ -12,11 +12,6 @@
 
                             <div class="row">
                                 <div class="col-sm-4 col-sm-offset-4">
-                                    <form role="search" method="get" id="searchform" action="#">
-                                        <div>
-                                            <input type="text" placeholder="Search and hit enter..." name="s" id="s"/>
-                                        </div>
-                                    </form>
                                     <p class="go-back-home"><a href="/">
                                             Back to Home Page</a></p>
                                 </div>

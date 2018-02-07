@@ -6,17 +6,19 @@
             <div class="col-md-8">
                 <article class="post">
                     <div class="post-thumb">
+                        <img src="<?= $user->getImage(); ?>" alt="">
                     </div>
                     <div class="post-content">
                         <header class="entry-header text-center text-uppercase">
-                            <h6><a href="<?= Url::toRoute(['site/category', 'id' => $user->id]); ?>"> <?= $user->name; ?></a></h6>
-
-                            <h1 class="entry-title"><a href="<?= Url::toRoute(['site/view', id => $article->id]); ?>"><?= $user->name; ?></a></h1>
-
-
+                            <h1 class="entry-title"><?= $user->getFullName(); ?></h1>
                         </header>
+                        <a href="<?= Url::toRoute(['site/edit', id => $user->id]); ?>"class="btn send-btn">Change</a>
                         <div class="entry-content">
-                            <?= $user->name; ?>
+                            <h4><?= $user->getFormattedUsername(); ?></h4>
+                            <h4><?= $user->getFormattedName(); ?></h4>
+                            <h4><?= $user->getFormattedSurname(); ?></h4>
+                            <h4><?= $user->getFormattedPatronymic(); ?></h4>
+                            <h4><?= $user->getFormattedEmail(); ?></h4>
                         </div>
 
                     </div>

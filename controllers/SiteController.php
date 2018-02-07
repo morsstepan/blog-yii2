@@ -104,6 +104,7 @@ class SiteController extends Controller
      */
     public function actionAbout($id)
     {
+        $article = Article::findOne(12);
         $user = User::findOne($id);
         $popular = Article::getPopular();
         $recent = Article::getRecent();
@@ -113,7 +114,8 @@ class SiteController extends Controller
             'user' => $user,
             'popular' => $popular,
             'recent' => $recent,
-            'categories' => $categories
+            'categories' => $categories,
+            'article' => $article
         ]);
     }
 
@@ -147,6 +149,14 @@ class SiteController extends Controller
             'recent' => $recent,
             'categories' => $categories
 
+        ]);
+    }
+
+    public function actionEdit($id)
+    {
+        $user = User::findOne($id);
+        return $this->render('edit',[
+            'model' => $user
         ]);
     }
 }
