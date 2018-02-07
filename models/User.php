@@ -14,6 +14,9 @@ use yii\web\IdentityInterface;
  * @property string $password
  * @property int $isAdmin
  * @property string $photo
+ * @property string $surname
+ * @property string $patronymic
+ * @property string $username
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -32,7 +35,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['isAdmin'], 'integer'],
-            [['name', 'email', 'password', 'photo'], 'string', 'max' => 255],
+            [['surname', 'patronymic', 'username'], 'required'],
+            [['name', 'email', 'password', 'photo', 'surname', 'patronymic', 'username'], 'string', 'max' => 255],
         ];
     }
 
@@ -48,6 +52,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'password' => 'Password',
             'isAdmin' => 'Is Admin',
             'photo' => 'Photo',
+            'surname' => 'Surname',
+            'patronymic' => 'Patronymic',
+            'username' => 'Username',
         ];
     }
 
@@ -63,7 +70,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return User::findOne($id);
         // TODO: Implement findIdentity() method.
     }
-
     /**
      * Finds an identity by the given token.
      * @param mixed $token the token to be looked for
@@ -77,7 +83,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         // TODO: Implement findIdentityByAccessToken() method.
     }
-
     /**
      * Returns an ID that can uniquely identify a user identity.
      * @return string|int an ID that uniquely identifies a user identity.
@@ -87,7 +92,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->id;
         // TODO: Implement getId() method.
     }
-
     /**
      * Returns a key that can be used to check the validity of a given identity ID.
      *
@@ -104,7 +108,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         // TODO: Implement getAuthKey() method.
     }
-
     /**
      * Validates the given auth key.
      *
@@ -117,17 +120,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         // TODO: Implement validateAuthKey() method.
     }
-
     public static function findByEmail($email)
     {
         return User::find()->where(['email' => $email])->one();
     }
-
     public function validatePassword($password)
     {
         return ($this->password == $password) ? true : false;
     }
-
     public function create()
     {
         return $this->save(false);
