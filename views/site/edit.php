@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
 
             <form class="form-horizontal" role="form">
 
-                <?php $form = ActiveForm::begin(); ?>
+                <?php $form = ActiveForm::begin(['action' =>'site/edit']); ?>
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -43,12 +43,9 @@ use yii\widgets\ActiveForm;
 
                 <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-
-
-
                 <div class="form-group">
                     <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-                    <?= Html::submitButton('Cancel', ['class' => 'btn btn-danger']) ?>
+                    <?= Html::resetButton('Cancel', ['class' => 'btn btn-danger']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>

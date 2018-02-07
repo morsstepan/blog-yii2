@@ -155,8 +155,18 @@ class SiteController extends Controller
     public function actionEdit($id)
     {
         $user = User::findOne($id);
-        return $this->render('edit',[
+        if ($user->load(Yii::$app->request->get()))
+        {
+            var_dump('fdfd');die;
+        }
+        if ($user->load(Yii::$app->request->post()) && $user->save()) {
+            var_dump("daad"); die;
+            return $this->redirect(['about', 'id' => $user->id]);
+        }
+
+        return $this->render('edit', [
             'model' => $user
         ]);
     }
+
 }
