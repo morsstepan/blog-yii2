@@ -56,7 +56,7 @@ PublicAsset::register($this);
                             <li><a href="<?= Url::toRoute(['auth/login'])?>">Login</a></li>
                             <li><a href="<?= Url::toRoute(['auth/signup'])?>">Register</a></li>
                         <?php else: ?>
-                            <li><a href="<?= Url::toRoute(['site/about'])?>">My profile</a></li>
+                            <li><a href="<?= Url::toRoute(['site/about', 'id' => Yii::$app->user->identity->id]); ?>">My profile</a></li>
                             <?= Html::beginForm(['/auth/logout'], 'post')
                             . Html::submitButton(
                                 'Logout (' . Yii::$app->user->identity->name . ')',

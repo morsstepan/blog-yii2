@@ -102,9 +102,9 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout()
+    public function actionAbout($id)
     {
-        $user = User::findOne(1);
+        $user = User::findOne($id);
         $popular = Article::getPopular();
         $recent = Article::getRecent();
         $categories = Category::getAllCategories();
