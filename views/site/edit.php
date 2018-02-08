@@ -27,9 +27,9 @@ use yii\widgets\ActiveForm;
         <div class="col-md-9 personal-info">
             <h3>Personal info</h3>
 
-            <form class="form-horizontal" role="form">
+            <!-- <form class="form-horizontal" role="form"> -->
 
-                <?php $form = ActiveForm::begin(['action' =>'site/edit']); ?>
+                <?php $form = ActiveForm::begin(['action' => 'edit']); ?>
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
 
                 <?php ActiveForm::end(); ?>
 
-            </form>
+                <!-- </form> -->
         </div>
     </div>
 </div>

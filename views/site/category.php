@@ -29,7 +29,7 @@ use yii\widgets\LinkPager; ?>
                                     <p><?= $article->description; ?></p>
                                 </div>
                                 <div class="social-share">
-                                    <span class="social-share-title pull-left text-capitalize">By Rubel On <?= $article->getDate(); ?></span>
+                                    <span class="social-share-title pull-left text-capitalize">On <?= $article->getDate(); ?></span>
 
                                 </div>
                             </div>

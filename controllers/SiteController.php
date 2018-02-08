@@ -37,7 +37,8 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['POST'],
+
                 ],
             ],
         ];
@@ -102,8 +103,9 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAbout($id)
+    public function actionAbout()
     {
+        $id = Yii::$app->request->get('id');
         $article = Article::findOne(12);
         $user = User::findOne($id);
         $popular = Article::getPopular();
@@ -119,8 +121,9 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionView($id)
+    public function actionView()
     {
+        $id = Yii::$app->request->get('id');
         $article = Article::findOne($id);
         $tags = $article->tags;
         $popular = Article::getPopular();
@@ -136,8 +139,9 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionCategory($id)
+    public function actionCategory()
     {
+        $id = Yii::$app->request->get('id');
         $data = Category::getArticlesByCategory($id);
         $popular = Article::getPopular();
         $recent = Article::getRecent();
@@ -152,21 +156,14 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionEdit($id)
+    public function actionEdit()
     {
-        $user = User::findOne($id);
-        if ($user->load(Yii::$app->request->get()))
-        {
-            var_dump('fdfd');die;
-        }
+        $user = User::findOne(\Yii::$app->user->id);
         if ($user->load(Yii::$app->request->post()) && $user->save()) {
-            var_dump("daad"); die;
             return $this->redirect(['about', 'id' => $user->id]);
         }
-
         return $this->render('edit', [
             'model' => $user
         ]);
     }
-
 }

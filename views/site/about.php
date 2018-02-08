@@ -12,7 +12,7 @@
                         <header class="entry-header text-center text-uppercase">
                             <h1 class="entry-title"><?= $user->getFullName(); ?></h1>
                         </header>
-                        <a href="<?= Url::toRoute(['site/edit', id => $user->id]); ?>"class="btn send-btn">Change</a>
+                        <a href="<?= Url::toRoute(['site/edit', 'id' => $user->id]); ?>"class="btn send-btn">Change</a>
                         <div class="entry-content">
                             <h4><?= $user->getFormattedUsername(); ?></h4>
                             <h4><?= $user->getFormattedName(); ?></h4>
