@@ -107,6 +107,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function getAuthKey()
     {
         // TODO: Implement getAuthKey() method.
+        return $this->auth_key;
     }
     /**
      * Validates the given auth key.
@@ -118,16 +119,41 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function validateAuthKey($authKey)
     {
+        return $this->getAuthKey() === $authKey;
         // TODO: Implement validateAuthKey() method.
     }
+
     public static function findByEmail($email)
     {
         return User::find()->where(['email' => $email])->one();
     }
+
     public function validatePassword($password)
     {
-        return ($this->password == $password) ? true : false;
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
+    /**
+     * Generates password hash from password and sets it to the model
+     *
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+    }
+    /**
+     * Generates "remember me" authentication key
+     */
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    /*public function validatePassword($password)
+    {
+        return ($this->password == $password) ? true : false;
+    }*/
+
     public function create()
     {
         return $this->save(false);

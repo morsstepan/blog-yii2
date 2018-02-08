@@ -10,6 +10,7 @@ class SignupForm extends Model
     public $email;
     public $password;
 
+
     public function rules()
     {
         return [
@@ -26,6 +27,8 @@ class SignupForm extends Model
         {
             $user = new User();
             $user->attributes = $this->attributes;
+            $user->setPassword($this->password);
+            $user->generateAuthKey();
             return $user->create();
         }
     }
