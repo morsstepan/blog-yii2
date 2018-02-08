@@ -42,7 +42,7 @@ class ImageUpload extends Model{
     public function deleteImage($currentImage)
     {
         //var_dump($currentImage);
-        //var_dump(($this->isExist($currentImage)), $this->isFile($currentImage));
+        //var_dump(($this->isExist($currentImage)));
         if ($this->isExist($currentImage) && $this->isFile($currentImage)) {
             unlink($this->getFolder() . $currentImage);
 
