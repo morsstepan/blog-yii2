@@ -151,6 +151,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function deleteImage()
     {
+        //var_dump('was ');
         $ImageUploadModel = new ImageUpload();
         $ImageUploadModel->deleteImage($this->photo);
     }

@@ -13,12 +13,12 @@ use yii\widgets\ActiveForm;
     <hr>
     <div class="row">
         <!-- left column -->
+        <?php $form = ActiveForm::begin(['action' => 'edit']); ?>
         <div class="col-md-3">
             <div class="text-center">
                 <img src="<?= $model->getImage(); ?>" class="avatar img-circle" alt="avatar">
                 <h6>Upload a photo...</h6>
-
-                <input type="file" class="form-control">
+                <?= $form->field($model, 'photo')->fileInput(['maxlength' => true]) ?>
             </div>
         </div>
 
@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
 
             <!-- <form class="form-horizontal" role="form"> -->
 
-                <?php $form = ActiveForm::begin(['action' => 'edit']); ?>
+                <?php #$form = ActiveForm::begin(['action' => 'edit']); ?>
 
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -48,10 +48,11 @@ use yii\widgets\ActiveForm;
                     <?= Html::resetButton('Cancel', ['class' => 'btn btn-danger']) ?>
                 </div>
 
-                <?php ActiveForm::end(); ?>
+
 
                 <!-- </form> -->
         </div>
+        <?php ActiveForm::end(); ?>
     </div>
 </div>
 <hr>

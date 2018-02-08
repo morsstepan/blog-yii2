@@ -4,16 +4,19 @@ namespace app\controllers;
 
 use app\models\Article;
 use app\models\Category;
+use app\models\ImageUpload;
 use app\models\Tag;
 use app\models\User;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\web\UploadedFile;
 
 class SiteController extends Controller
 {
@@ -158,12 +161,49 @@ class SiteController extends Controller
 
     public function actionEdit()
     {
-        $user = User::findOne(\Yii::$app->user->id);
-        if ($user->load(Yii::$app->request->post()) && $user->save()) {
+
+        //var_dump(User::findOne(Yii::$app->user->id));
+
+        $user = User::findOne(Yii::$app->user->id);
+        //var_dump('---------------------------------');
+        //var_dump($user);
+        //var_dump($user->photo);
+        $model = new ImageUpload;
+        $file = UploadedFile::getInstance($user, 'photo');
+        //var_dump($user);
+        $userPhoto = $user->photo;
+        if ($user->load(Yii::$app->request->post()) && $user->save() && $user->saveImage($model->uploadImage($file, $userPhoto))) {
+            //var_dump($user);
+            //var_dump($file);
+            //var_dump($user->photo);
+
+            //if($user->saveImage($model->uploadImage($file, $user->photo)))
+            //{
+
+                //var_dump($user->photo);
+                //var_dump($file);
+                //var_dump($user->photo);
+                //var_dump($user->photo);
             return $this->redirect(['about', 'id' => $user->id]);
+            //}
+
         }
         return $this->render('edit', [
             'model' => $user
         ]);
+    }
+
+    public function actionSetImage()
+    {
+        var_dump('here'); die;
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = Article::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
