@@ -24,6 +24,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
+    public $new_password;
+
     public static function tableName()
     {
         return 'user';
@@ -39,6 +41,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['isAdmin'], 'integer'],
             [['name', 'surname', 'patronymic', 'username', 'email', 'password_hash', 'photo'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
+            ['new_password', 'required'],
+            ['new_password', 'string'],
         ];
     }
 
@@ -134,6 +138,20 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
+
+    public function getPassword()
+    {
+        return '';
+    }
+
+    public function updatePassword($new_password) {
+        //var_dump($new_password);
+        //var_dump($this->password_hash);
+        $this->password_hash = Yii::$app->security->generatePasswordHash($new_password);
+        //var_dump($this->password_hash);
+        return $this->save(false);
+    }
+
     /**
      * Generates "remember me" authentication key
      */

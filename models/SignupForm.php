@@ -9,6 +9,7 @@ class SignupForm extends Model
     public $name;
     public $email;
     public $password;
+    //public $new_password;
 
 
     public function rules()
@@ -17,7 +18,8 @@ class SignupForm extends Model
             [['name','email','password'], 'required'],
             [['name'], 'string'],
             [['email'], 'email'],
-            [['email'], 'unique', 'targetClass' => 'app\models\User', 'targetAttribute' => 'email']
+            [['email'], 'unique', 'targetClass' => 'app\models\User', 'targetAttribute' => 'email'],
+
         ];
     }
 

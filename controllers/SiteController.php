@@ -173,6 +173,7 @@ class SiteController extends Controller
         //var_dump($user);
         $userPhoto = $user->photo;
         if ($user->load(Yii::$app->request->post()) && $user->save() && $user->saveImage($model->uploadImage($file, $userPhoto))) {
+            $user->updatePassword($user->new_password);
             //var_dump($user);
             //var_dump($file);
             //var_dump($user->photo);

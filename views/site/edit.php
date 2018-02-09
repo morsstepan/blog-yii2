@@ -43,6 +43,8 @@ use yii\widgets\ActiveForm;
 
                 <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
+                <?= $form->field($model, 'new_password')->passwordInput() ?>
+
                 <div class="form-group">
                     <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
                     <?= Html::resetButton('Cancel', ['class' => 'btn btn-danger']) ?>
