@@ -6,7 +6,10 @@ use yii\base\Model;
 
 class SignupForm extends Model
 {
+    public $username;
     public $name;
+    public $surname;
+    public $patronymic;
     public $email;
     public $password;
     //public $new_password;
@@ -15,8 +18,8 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            [['name','email','password'], 'required'],
-            [['name'], 'string'],
+            [['username', 'name', 'surname', 'patronymic', 'email', 'password' ], 'required'],
+            [['username', 'name', 'surname', 'patronymic'], 'string'],
             [['email'], 'email'],
             [['email'], 'unique', 'targetClass' => 'app\models\User', 'targetAttribute' => 'email'],
 

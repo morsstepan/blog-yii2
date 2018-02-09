@@ -1,12 +1,9 @@
 <?php
-
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\LoginForm */
-
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -27,7 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ]); ?>
 
-                <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'username')->textInput() ?>
+
+                <?= $form->field($model, 'name')->textInput() ?>
+
+                <?= $form->field($model, 'surname')->textInput() ?>
+
+                <?= $form->field($model, 'patronymic')->textInput() ?>
 
                 <?= $form->field($model, 'email')->textInput() ?>
 

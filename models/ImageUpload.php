@@ -20,12 +20,16 @@ class ImageUpload extends Model{
 
     public function uploadImage($file, $currentImage)
     {
-        #var_dump($currentImage);
-        $this->image = $file;
-        if($this -> validate()) {
-            $this->deleteImage($currentImage);
-            return $this->saveImage();
-        }
+        //var_dump($this->isExist($currentImage) && $this->isFile($currentImage));
+        // var_dump($file);
+
+            //var_dump($file);
+            $this->image = $file;
+            if ($this->validate()) {
+                $this->deleteImage($currentImage);
+                return $this->saveImage();
+            }
+
     }
 
     private function getFolder()

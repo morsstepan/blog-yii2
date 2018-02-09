@@ -133,6 +133,7 @@ class SiteController extends Controller
         $recent = Article::getRecent();
         $categories = Category::getAllCategories();
         //$tags = ArrayHelper::map($article->tags, 'id', 'title');
+        $article->viewedCounter();
         return $this->render('single', [
             'article' => $article,
             'tags' => $tags,
@@ -161,33 +162,20 @@ class SiteController extends Controller
 
     public function actionEdit()
     {
-
-        //var_dump(User::findOne(Yii::$app->user->id));
-
         $user = User::findOne(Yii::$app->user->id);
-        //var_dump('---------------------------------');
-        //var_dump($user);
-        //var_dump($user->photo);
         $model = new ImageUpload;
         $file = UploadedFile::getInstance($user, 'photo');
         //var_dump($user);
         $userPhoto = $user->photo;
-        if ($user->load(Yii::$app->request->post()) && $user->save() && $user->saveImage($model->uploadImage($file, $userPhoto))) {
-            $user->updatePassword($user->new_password);
-            //var_dump($user);
-            //var_dump($file);
-            //var_dump($user->photo);
-
-            //if($user->saveImage($model->uploadImage($file, $user->photo)))
-            //{
-
-                //var_dump($user->photo);
-                //var_dump($file);
-                //var_dump($user->photo);
-                //var_dump($user->photo);
-            return $this->redirect(['about', 'id' => $user->id]);
-            //}
-
+        //$res = $model->uploadImage($file, $userPhoto);
+        //var_dump($res); die;
+        if ($user->load(Yii::$app->request->post()) && $user->save())
+        {
+            if ($user->saveImage($model->uploadImage($file, $userPhoto)))
+            {
+                $user->updatePassword($user->new_password);
+                return $this->redirect(['about', 'id' => $user->id]);
+            }
         }
         return $this->render('edit', [
             'model' => $user

@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <article class="post">
                     <div class="post-thumb">
-                        <img src="<?= $user->getImage(); ?>" alt="">
+                        <img src="<?= $user->getImage(); ?>" class="avatar img-circle" alt="avatar" style="width: 50%; height: 50%">
                     </div>
                     <div class="post-content">
                         <header class="entry-header text-center text-uppercase">

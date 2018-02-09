@@ -29,8 +29,6 @@ use yii\widgets\ActiveForm;
 
             <!-- <form class="form-horizontal" role="form"> -->
 
-                <?php #$form = ActiveForm::begin(['action' => 'edit']); ?>
-
                 <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'surname')->textInput(['maxlength' => true]) ?>
@@ -41,13 +39,12 @@ use yii\widgets\ActiveForm;
 
                 <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-
                 <?= $form->field($model, 'new_password')->passwordInput() ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-                    <?= Html::resetButton('Cancel', ['class' => 'btn btn-danger']) ?>
+                    <?= Html::resetButton('Reset', ['class' => 'btn btn-danger']) ?>
+                    <?= Html::a('Cancel', ['/site/about', 'id' => Yii::$app->user->identity->id], ['class'=>'btn btn-primary']) ?>
                 </div>
 
 

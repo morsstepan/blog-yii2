@@ -46,7 +46,7 @@ PublicAsset::register($this);
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                 <ul class="nav navbar-nav text-uppercase">
-                    <li><a data-toggle="dropdown" class="dropdown-toggle" href="/">Home</a>
+                    <li><a data-toggle="dropdown" class="dropdown-toggle" href="<?= Url::to(['/']) ?>">Home</a>
 
                     </li>
                 </ul>
@@ -56,7 +56,7 @@ PublicAsset::register($this);
                             <li><a href="<?= Url::toRoute(['auth/login'])?>">Login</a></li>
                             <li><a href="<?= Url::toRoute(['auth/signup'])?>">Register</a></li>
                         <?php else: ?>
-                            <li><a href="<?= Url::toRoute(['site/about', id => Yii::$app->user->identity->id]); ?>">My profile</a></li>
+                            <li><a href="<?= Url::toRoute(['site/about', 'id' => Yii::$app->user->identity->id]); ?>">My profile</a></li>
                             <?= Html::beginForm(['/auth/logout'], 'post')
                             . Html::submitButton(
                                 'Logout (' . Yii::$app->user->identity->name . ')',
